@@ -1,0 +1,121 @@
+_wandb:
+    value:
+        cli_version: 0.25.0
+        e:
+            hoa9powwtfaoy82utnfp9abbe4vupigx:
+                codePath: main.py
+                codePathLocal: main.py
+                cpu_count: 12
+                cpu_count_logical: 16
+                disk:
+                    /:
+                        total: "1022623027200"
+                        used: "661369384960"
+                email: beniamin.brad@stud.ubbcluj.ro
+                executable: C:\Users\benia\AppData\Local\Programs\Python\Python313\python.exe
+                git:
+                    commit: b9aab1c6156381ae7ae2997e3490e7b99e195dde
+                    remote: https://github.com/bartbussmann/BatchTopK.git
+                host: bensasus
+                memory:
+                    total: "16768192512"
+                os: Windows-11-10.0.26200-SP0
+                program: C:\Facultate\Licență\BatchTopKCode\BatchTopK\main.py
+                python: CPython 3.13.3
+                root: C:\Facultate\Licență\BatchTopKCode\BatchTopK
+                startedAt: "2026-03-10T09:12:52.652931Z"
+                writerId: hoa9powwtfaoy82utnfp9abbe4vupigx
+        m: []
+        python_version: 3.13.3
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "3":
+                - 13
+                - 16
+                - 61
+            "4": 3.13.3
+            "5": 0.25.0
+            "6": 4.57.6
+            "8":
+                - 3
+            "10":
+                - 20
+            "12": 0.25.0
+            "13": windows-amd64
+act_size:
+    value: 768
+aux_penalty:
+    value: 0.03125
+bandwidth:
+    value: 0.001
+batch_size:
+    value: 1024
+beta1:
+    value: 0.9
+beta2:
+    value: 0.99
+checkpoint_freq:
+    value: 10000
+dataset_path:
+    value: Skylion007/openwebtext
+device:
+    value: cpu
+dict_size:
+    value: 12288
+dtype:
+    value: torch.float32
+hook_point:
+    value: blocks.8.hook_resid_pre
+input_unit_norm:
+    value: true
+l1_coeff:
+    value: 0.0018
+layer:
+    value: 8
+lr:
+    value: 0.0003
+max_grad_norm:
+    value: 100000
+model_batch_size:
+    value: 16
+model_name:
+    value: gpt2-small
+n_batches_to_dead:
+    value: 5
+name:
+    value: gpt2-small_blocks.8.hook_resid_pre_12288_batchtopk_32_0.0003
+num_batches_in_buffer:
+    value: 4
+num_tokens:
+    value: 100000
+perf_log_freq:
+    value: 1000
+sae_type:
+    value: batchtopk
+seed:
+    value: 49
+seq_len:
+    value: 128
+site:
+    value: resid_pre
+top_k:
+    value: 32
+top_k_aux:
+    value: 512
+wandb_project:
+    value: batchtopk_comparison

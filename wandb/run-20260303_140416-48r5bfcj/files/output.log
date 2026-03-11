@@ -1,0 +1,82 @@
+Model and config saved as artifact at step 0
+  0%| | 480/244140 [2:37:06<1329:08:12, 19.64s/it, Loss=0.2600, L0=32.0000, L2=0.1602, L1=0.0949, L1
+Traceback (most recent call last):
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\activation_store.py", line 69, in next_batch
+    return next(self.dataloader_iter)[0]
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\utils\data\dataloader.py", line 732, in __next__
+    data = self._next_data()
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\utils\data\dataloader.py", line 787, in _next_data
+    index = self._next_index()  # may raise StopIteration
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\utils\data\dataloader.py", line 722, in _next_index
+    return next(self._sampler_iter)  # may raise StopIteration
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\main.py", line 40, in <module>
+    train_sae(sae, activations_store, model, cfg)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\training.py", line 12, in train_sae
+    batch = activation_store.next_batch()
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\activation_store.py", line 71, in next_batch
+    self.activation_buffer = self._fill_buffer()
+                             ~~~~~~~~~~~~~~~~~^^
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\activation_store.py", line 60, in _fill_buffer
+    activations = self.get_activations(batch_tokens).reshape(-1, self.cfg["act_size"])
+                  ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Facultate\Licență\BatchTopKCode\BatchTopK\activation_store.py", line 49, in get_activations
+    _, cache = self.model.run_with_cache(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        batch_tokens,
+        ^^^^^^^^^^^^^
+        names_filter=[self.hook_point],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        stop_at_layer=self.cfg["layer"] +1,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\HookedTransformer.py", line 702, in run_with_cache
+    out, cache_dict = super().run_with_cache(
+                      ~~~~~~~~~~~~~~~~~~~~~~^
+        *model_args, remove_batch_dim=remove_batch_dim, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\hook_points.py", line 560, in run_with_cache
+    model_out = self(*model_args, **model_kwargs)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\HookedTransformer.py", line 620, in forward
+    residual = block(
+        residual,
+    ...<4 lines>...
+        attention_mask=attention_mask,
+    )  # [batch, pos, d_model]
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\components\transformer_block.py", line 186, in forward
+    mlp_out = self.apply_mlp(normalized_resid_mid)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\components\transformer_block.py", line 210, in apply_mlp
+    mlp_out = self.mlp(normalized_resid)  # [batch, pos, d_model]
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\components\mlps\mlp.py", line 38, in forward
+    pre_act = self.hook_pre(batch_addmm(self.b_in, self.W_in, x))  # [batch, pos, d_mlp]
+                            ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\utilities\addmm.py", line 34, in batch_addmm
+    x = vanilla_addmm(bias, x.view(-1, x.size(-1)), weight)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\transformer_lens\utilities\addmm.py", line 19, in vanilla_addmm
+    return torch.addmm(input, mat1, mat2)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -6,7 +6,6 @@ def train_sae(sae, activation_store, model, cfg):
     num_batches = cfg["num_tokens"] // cfg["batch_size"]
     optimizer = torch.optim.Adam(sae.parameters(), lr=cfg["lr"], betas=(cfg["beta1"], cfg["beta2"]))
     pbar = tqdm.trange(num_batches)
-
     wandb_run = init_wandb(cfg)
     
     for i in pbar:
@@ -29,7 +28,6 @@ def train_sae(sae, activation_store, model, cfg):
 
     save_checkpoint(wandb_run, sae, cfg, i)
     
-
 def train_sae_group(saes, activation_store, model, cfgs):
     num_batches = cfgs[0]["num_tokens"] // cfgs[0]["batch_size"]
     optimizers = [torch.optim.Adam(sae.parameters(), lr=cfg["lr"], betas=(cfg["beta1"], cfg["beta2"])) for sae, cfg in zip(saes, cfgs)]

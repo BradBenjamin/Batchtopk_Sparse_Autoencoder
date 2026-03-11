@@ -4,23 +4,23 @@ import torch
 def get_default_cfg():
     default_cfg = {
         "seed": 49,
-        "batch_size": 4096,
+        "batch_size": 1024,  # Initial: 4096, for testing: 1024
         "lr": 3e-4,
-        "num_tokens": int(1e9),
+        "num_tokens": 1000000, # Initial: int(1e9), for testing: 1000000
         "l1_coeff": 0,
         "beta1": 0.9,
         "beta2": 0.99,
         "max_grad_norm": 100000,
         "seq_len": 128,
-        "dtype": torch.float32,
+        "dtype": torch.float32, # Initial: float32, for testing: float32
         "model_name": "gpt2-small",
         "site": "resid_pre",
         "layer": 8,
         "act_size": 768,
         "dict_size": 12288,
-        "device": "cuda:0",
-        "model_batch_size": 512,
-        "num_batches_in_buffer": 10,
+        "device": "cpu",
+        "model_batch_size": 16, # Initial: 512, for testing: 16
+        "num_batches_in_buffer": 4, # Initial: 10, for testing: 4
         "dataset_path": "Skylion007/openwebtext",
         "wandb_project": "sparse_autoencoders",
         "input_unit_norm": True,

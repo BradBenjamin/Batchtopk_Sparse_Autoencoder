@@ -60,8 +60,6 @@ class BaseAutoencoder(nn.Module):
     def update_inactive_features(self, acts):
         self.num_batches_not_active += (acts.sum(0) == 0).float()
         self.num_batches_not_active[acts.sum(0) > 0] = 0
-
-
 class BatchTopKSAE(BaseAutoencoder):
     def __init__(self, cfg):
         super().__init__(cfg)
@@ -127,8 +125,6 @@ class BatchTopKSAE(BaseAutoencoder):
             return l2_loss_aux
         else:
             return torch.tensor(0, dtype=x.dtype, device=x.device)
-
-
 class TopKSAE(BaseAutoencoder):
     def __init__(self, cfg):
         super().__init__(cfg)
@@ -192,8 +188,6 @@ class TopKSAE(BaseAutoencoder):
             return l2_loss_aux
         else:
             return torch.tensor(0, dtype=x.dtype, device=x.device)
-
-
 class VanillaSAE(BaseAutoencoder):
     def __init__(self, cfg):
         super().__init__(cfg)
@@ -247,7 +241,6 @@ class RectangleFunction(autograd.Function):
         grad_input = grad_output.clone()
         grad_input[(x <= -0.5) | (x >= 0.5)] = 0
         return grad_input
-
 class JumpReLUFunction(autograd.Function):
     @staticmethod
     def forward(ctx, x, log_threshold, bandwidth):
@@ -267,7 +260,6 @@ class JumpReLUFunction(autograd.Function):
             * grad_output
         )
         return x_grad, threshold_grad, None  # None for bandwidth
-
 class JumpReLU(nn.Module):
     def __init__(self, feature_size, bandwidth, device='cpu'):
         super(JumpReLU, self).__init__()
@@ -276,7 +268,6 @@ class JumpReLU(nn.Module):
 
     def forward(self, x):
         return JumpReLUFunction.apply(x, self.log_threshold, self.bandwidth)
-
 class StepFunction(autograd.Function):
     @staticmethod
     def forward(ctx, x, log_threshold, bandwidth):
@@ -296,7 +287,6 @@ class StepFunction(autograd.Function):
             * grad_output
         )
         return x_grad, threshold_grad, None  # None for bandwidth
-
 class JumpReLUSAE(BaseAutoencoder):
     def __init__(self, cfg):
         super().__init__(cfg)

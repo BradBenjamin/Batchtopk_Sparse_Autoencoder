@@ -1,0 +1,13 @@
+{"time":"2026-02-27T09:53:49.6909993+02:00","level":"INFO","msg":"stream: starting","core version":"0.25.0"}
+{"time":"2026-02-27T09:53:51.5464602+02:00","level":"INFO","msg":"stream: created new stream","id":"yfhmcr6d"}
+{"time":"2026-02-27T09:53:51.55508+02:00","level":"INFO","msg":"handler: started","stream_id":"yfhmcr6d"}
+{"time":"2026-02-27T09:53:51.5734293+02:00","level":"INFO","msg":"stream: started","id":"yfhmcr6d"}
+{"time":"2026-02-27T09:53:51.5775681+02:00","level":"INFO","msg":"writer: started","stream_id":"yfhmcr6d"}
+{"time":"2026-02-27T09:53:51.5795825+02:00","level":"INFO","msg":"sender: started","stream_id":"yfhmcr6d"}
+{"time":"2026-02-27T09:57:08.5110403+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/beniamin-brad-babes-bolyai-university/batchtopk_comparison/yfhmcr6d/file_stream\": read tcp 10.220.16.254:50903->35.186.228.49:443: wsarecv: An existing connection was forcibly closed by the remote host."}
+{"time":"2026-02-27T09:57:16.6261008+02:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: error making HTTP request: POST https://api.wandb.ai/files/beniamin-brad-babes-bolyai-university/batchtopk_comparison/yfhmcr6d/file_stream giving up after 2 attempt(s): Post \"https://api.wandb.ai/files/beniamin-brad-babes-bolyai-university/batchtopk_comparison/yfhmcr6d/file_stream\": tls: failed to verify certificate: x509: certificate signed by unknown authority. got response: <nil>"}
+{"time":"2026-02-27T09:59:37.8868208+02:00","level":"INFO","msg":"stream: closing","id":"yfhmcr6d"}
+{"time":"2026-02-27T09:59:39.0651157+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-02-27T09:59:39.0671104+02:00","level":"INFO","msg":"handler: closed","stream_id":"yfhmcr6d"}
+{"time":"2026-02-27T09:59:39.0691308+02:00","level":"INFO","msg":"sender: closed","stream_id":"yfhmcr6d"}
+{"time":"2026-02-27T09:59:39.0691308+02:00","level":"INFO","msg":"stream: closed","id":"yfhmcr6d"}

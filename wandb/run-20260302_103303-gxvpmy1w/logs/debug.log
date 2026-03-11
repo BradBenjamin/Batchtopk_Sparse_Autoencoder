@@ -1,0 +1,45 @@
+2026-03-02 10:33:03,378 INFO    MainThread:18796 [wandb_setup.py:_flush():81] Current SDK version is 0.25.0
+2026-03-02 10:33:03,379 INFO    MainThread:18796 [wandb_setup.py:_flush():81] Configure stats pid to 18796
+2026-03-02 10:33:03,379 INFO    MainThread:18796 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-03-02 10:33:03,568 INFO    MainThread:18796 [wandb_init.py:init():844] calling init triggers
+2026-03-02 10:33:03,569 INFO    MainThread:18796 [wandb_init.py:init():849] wandb.init called with sweep_config: {}
+config: {'seed': 49, 'batch_size': 4096, 'lr': 0.0003, 'num_tokens': 1000000000, 'l1_coeff': 0.004, 'beta1': 0.9, 'beta2': 0.99, 'max_grad_norm': 100000, 'seq_len': 128, 'dtype': torch.float32, 'model_name': 'gpt2-small', 'site': 'resid_pre', 'layer': 8, 'act_size': 768, 'dict_size': 12288, 'device': 'cpu', 'model_batch_size': 512, 'num_batches_in_buffer': 10, 'dataset_path': 'Skylion007/openwebtext', 'wandb_project': 'batchtopk_comparison', 'input_unit_norm': True, 'perf_log_freq': 1000, 'sae_type': 'topk', 'checkpoint_freq': 10000, 'n_batches_to_dead': 5, 'top_k': 32, 'top_k_aux': 512, 'aux_penalty': 0.03125, 'bandwidth': 0.001, 'hook_point': 'blocks.8.hook_resid_pre', 'name': 'gpt2-small_blocks.8.hook_resid_pre_12288_topk_32_0.0003', '_wandb': {}}
+2026-03-02 10:33:03,569 INFO    MainThread:18796 [wandb_init.py:init():892] starting backend
+2026-03-02 10:33:07,773 INFO    MainThread:18796 [wandb_init.py:init():895] sending inform_init request
+2026-03-02 10:33:07,956 INFO    MainThread:18796 [wandb_init.py:init():903] backend started and connected
+2026-03-02 10:33:07,962 INFO    MainThread:18796 [wandb_init.py:init():973] updated telemetry
+2026-03-02 10:33:08,140 INFO    MainThread:18796 [wandb_init.py:init():997] communicating run to backend with 90.0 second timeout
+2026-03-02 10:33:13,967 INFO    MainThread:18796 [wandb_init.py:init():1042] starting run threads in backend
+2026-03-02 10:33:24,061 INFO    MainThread:18796 [wandb_run.py:_console_start():2524] atexit reg
+2026-03-02 10:33:24,062 INFO    MainThread:18796 [wandb_run.py:_redirect():2373] redirect: wrap_raw
+2026-03-02 10:33:24,062 INFO    MainThread:18796 [wandb_run.py:_redirect():2442] Wrapping output streams.
+2026-03-02 10:33:24,062 INFO    MainThread:18796 [wandb_run.py:_redirect():2465] Redirects installed.
+2026-03-02 10:33:24,078 INFO    MainThread:18796 [wandb_init.py:init():1082] run started, returning control to user process
+2026-03-02 10:42:25,471 ERROR   wandb-AsyncioManager-main:18796 [service_client.py:_forward_responses():131] Error reading server response.
+Traceback (most recent call last):
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_events.py", line 463, in finish_socket_func
+    return ov.getresult()
+           ~~~~~~~~~~~~^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 127, in _forward_responses
+    while response := await self._read_server_response():
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 141, in _read_server_response
+    header = await self._reader.readexactly(_HEADER_BYTE_INT_LEN)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\streams.py", line 769, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\streams.py", line 539, in _wait_for_data
+    await self._waiter
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_events.py", line 804, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\benia\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_events.py", line 467, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+2026-03-02 10:42:25,926 INFO    wandb-AsyncioManager-main:18796 [mailbox.py:close():155] Closing mailbox, abandoning 1 handles.

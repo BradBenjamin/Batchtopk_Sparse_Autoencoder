@@ -5,7 +5,7 @@ import pandas as pd
 api = wandb.Api()
 
 project = "batchtopk_comparison"
-entity = "patrickaaleask"
+entity = "beniamin-brad-babes-bolyai-university"
 
 runs = api.runs(f"{entity}/{project}")
 data = []

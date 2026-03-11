@@ -1,14 +1,14 @@
-#%%
 from training import train_sae, train_sae_group
 from sae import VanillaSAE, TopKSAE, BatchTopKSAE, JumpReLUSAE
 from activation_store import ActivationsStore
 from config import get_default_cfg, post_init_cfg
 from transformer_lens import HookedTransformer
+import torch
 
 
-for l1_coeff in [0.004, 0.0018, 0.0008]:
+for l1_coeff in [0.0018]:
     cfg = get_default_cfg()
-    cfg["sae_type"] = "jumprelu" # "vanilla", "topk", "batchtopk"
+    cfg["sae_type"] = "batchtopk" # "vanilla", "topk", "batchtopk", "jumprelu"
     cfg["model_name"] = "gpt2-small"
     cfg["layer"] = 8
     cfg["site"] = "resid_pre"
@@ -20,7 +20,7 @@ for l1_coeff in [0.004, 0.0018, 0.0008]:
     cfg["dict_size"] = 768 * 16
     cfg['wandb_project'] = 'batchtopk_comparison'
     cfg['act_size'] = 768
-    cfg['device'] = 'cuda'
+    cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
     cfg['bandwidth'] = 0.001
     cfg['l1_coeff'] = l1_coeff
 
@@ -39,6 +39,7 @@ for l1_coeff in [0.004, 0.0018, 0.0008]:
     activations_store = ActivationsStore(model, cfg)
     train_sae(sae, activations_store, model, cfg)
 
+'''
 for sae_type in ['topk', 'batchtopk']:
     for top_k in [16, 32, 64]:
         cfg = get_default_cfg()
@@ -55,7 +56,7 @@ for sae_type in ['topk', 'batchtopk']:
         cfg['wandb_project'] = 'batchtopk_comparison'
         cfg['l1_coeff'] = 0.
         cfg['act_size'] = 768
-        cfg['device'] = 'cuda'
+        cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
         cfg['bandwidth'] = 0.001
         cfg['top_k'] = top_k
 
@@ -73,8 +74,6 @@ for sae_type in ['topk', 'batchtopk']:
         model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"])
         activations_store = ActivationsStore(model, cfg)
         train_sae(sae, activations_store, model, cfg)
-
-
 for sae_type in ['topk', 'batchtopk']:
     # don't retrain *16
     for dict_size in [768*4, 768*8, 768*32]:
@@ -92,7 +91,7 @@ for sae_type in ['topk', 'batchtopk']:
         cfg['wandb_project'] = 'batchtopk_comparison'
         cfg['l1_coeff'] = 0.
         cfg['act_size'] = 768
-        cfg['device'] = 'cuda'
+        cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
         cfg['bandwidth'] = 0.001
         cfg['top_k'] = 32
 
@@ -110,3 +109,4 @@ for sae_type in ['topk', 'batchtopk']:
         model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"])
         activations_store = ActivationsStore(model, cfg)
         train_sae(sae, activations_store, model, cfg)
+'''

@@ -1,0 +1,28 @@
+{
+  "os":  "Windows-11-10.0.26200-SP0",
+  "python":  "CPython 3.13.3",
+  "startedAt":  "2026-03-02T08:33:03.371818Z",
+  "program":  "C:\\Facultate\\Licență\\BatchTopKCode\\BatchTopK\\main.py",
+  "codePath":  "main.py",
+  "codePathLocal":  "main.py",
+  "git":  {
+    "remote":  "https://github.com/bartbussmann/BatchTopK.git",
+    "commit":  "b9aab1c6156381ae7ae2997e3490e7b99e195dde"
+  },
+  "email":  "beniamin.brad@stud.ubbcluj.ro",
+  "root":  "C:\\Facultate\\Licență\\BatchTopKCode\\BatchTopK",
+  "host":  "bensasus",
+  "executable":  "C:\\Users\\benia\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "cpu_count":  12,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "1022623027200",
+      "used":  "652486606848"
+    }
+  },
+  "memory":  {
+    "total":  "16768192512"
+  },
+  "writerId":  "m3g1savwf8grb6t7hhrg4sbxow1y445z"
+}

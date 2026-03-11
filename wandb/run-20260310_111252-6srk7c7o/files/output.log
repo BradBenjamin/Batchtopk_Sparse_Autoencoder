@@ -1,0 +1,3 @@
+Model and config saved as artifact at step 0
+100%|███████████████| 97/97 [09:41<00:00,  5.99s/it, Loss=0.5200, L0=32.0000, L2=0.3826, L1=0.1332, L1_norm=74.0195]
+Model and config saved as artifact at step 96
