@@ -6,6 +6,7 @@ from transformer_lens import HookedTransformer
 import torch
 
 
+num_tokens = 20000000
 for l1_coeff in [0.0018]:
     cfg = get_default_cfg()
     cfg["sae_type"] = "batchtopk" # "vanilla", "topk", "batchtopk", "jumprelu"
@@ -23,6 +24,7 @@ for l1_coeff in [0.0018]:
     cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
     cfg['bandwidth'] = 0.001
     cfg['l1_coeff'] = l1_coeff
+    cfg['num_tokens'] = num_tokens
 
     if cfg["sae_type"] == "vanilla":
         sae = VanillaSAE(cfg)
@@ -35,9 +37,9 @@ for l1_coeff in [0.0018]:
 
     cfg = post_init_cfg(cfg)
                 
-    model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"])
-    activations_store = ActivationsStore(model, cfg)
-    train_sae(sae, activations_store, model, cfg)
+    model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"]) # 1. Load Gpt2
+    activations_store = ActivationsStore(model, cfg) # 2. Prepare activation storage
+    train_sae(sae, activations_store, model, cfg) # 3.Train the SAE
 
 '''
 for sae_type in ['topk', 'batchtopk']:

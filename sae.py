@@ -224,7 +224,6 @@ class VanillaSAE(BaseAutoencoder):
         }
         return output
 
-
 import torch
 import torch.nn as nn
 import torch.autograd as autograd

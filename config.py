@@ -38,7 +38,6 @@ def get_default_cfg():
     }
     default_cfg = post_init_cfg(default_cfg)
     return default_cfg
-
 def post_init_cfg(cfg):
     cfg["hook_point"] = utils.get_act_name(cfg["site"], cfg["layer"])
     cfg["name"] = f"{cfg['model_name']}_{cfg['hook_point']}_{cfg['dict_size']}_{cfg['sae_type']}_{cfg['top_k']}_{cfg['lr']}"
