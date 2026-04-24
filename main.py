@@ -6,40 +6,40 @@ from transformer_lens import HookedTransformer
 import torch
 
 
-num_tokens = 20000000
-for l1_coeff in [0.0018]:
-    cfg = get_default_cfg()
-    cfg["sae_type"] = "batchtopk" # "vanilla", "topk", "batchtopk", "jumprelu"
-    cfg["model_name"] = "gpt2-small"
-    cfg["layer"] = 8
-    cfg["site"] = "resid_pre"
-    cfg["dataset_path"] = "Skylion007/openwebtext"
-    cfg["aux_penalty"] = (1/32)
-    cfg["lr"] = 3e-4
-    cfg["input_unit_norm"] = True
-    cfg["top_k"] = 32
-    cfg["dict_size"] = 768 * 16
-    cfg['wandb_project'] = 'batchtopk_comparison'
-    cfg['act_size'] = 768
-    cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
-    cfg['bandwidth'] = 0.001
-    cfg['l1_coeff'] = l1_coeff
-    cfg['num_tokens'] = num_tokens
+num_tokens = 250000000
+l1_coeff = 0.0001 # original: 0.0018, for testing: 0.01
+cfg = get_default_cfg()
+cfg["sae_type"] = "batchtopk" # "vanilla", "topk", "batchtopk", "jumprelu"
+cfg["model_name"] = "gemma-2-2b-it" # Original: "gpt2-small"
+cfg["layer"] = 8
+cfg["site"] = "resid_pre"
+cfg["dataset_path"] = "Skylion007/openwebtext"
+cfg["aux_penalty"] = (1/32)
+cfg["lr"] = 3e-4
+cfg["input_unit_norm"] = True
+cfg["top_k"] = 32
+cfg["dict_size"] = 2304 * 16
+cfg['wandb_project'] = 'batchtopk_comparison'
+cfg['act_size'] = 2304
+cfg['device'] = "cuda" if torch.cuda.is_available() else "cpu"
+cfg['bandwidth'] = 0.001
+cfg['l1_coeff'] = l1_coeff
+cfg['num_tokens'] = num_tokens
 
-    if cfg["sae_type"] == "vanilla":
-        sae = VanillaSAE(cfg)
-    elif cfg["sae_type"] == "topk":
-        sae = TopKSAE(cfg)
-    elif cfg["sae_type"] == "batchtopk":
-        sae = BatchTopKSAE(cfg)
-    elif cfg["sae_type"] == 'jumprelu':
-        sae = JumpReLUSAE(cfg)
+if cfg["sae_type"] == "vanilla":
+    sae = VanillaSAE(cfg)
+elif cfg["sae_type"] == "topk":
+    sae = TopKSAE(cfg)
+elif cfg["sae_type"] == "batchtopk":
+    sae = BatchTopKSAE(cfg)
+elif cfg["sae_type"] == 'jumprelu':
+    sae = JumpReLUSAE(cfg)
 
-    cfg = post_init_cfg(cfg)
-                
-    model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"]) # 1. Load Gpt2
-    activations_store = ActivationsStore(model, cfg) # 2. Prepare activation storage
-    train_sae(sae, activations_store, model, cfg) # 3.Train the SAE
+cfg = post_init_cfg(cfg)
+            
+model = HookedTransformer.from_pretrained(cfg["model_name"]).to(cfg["dtype"]).to(cfg["device"]) # 1. Load model
+activations_store = ActivationsStore(model, cfg) # 2. Prepare activation storage
+train_sae(sae, activations_store, model, cfg) # 3.Train the SAE
 
 '''
 for sae_type in ['topk', 'batchtopk']:
